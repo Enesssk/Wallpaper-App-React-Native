@@ -6,6 +6,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
 import { scaleFontSize } from '../../assets/scaling';
 import { faBarsStaggered } from '@fortawesome/free-solid-svg-icons';
 import Search from '../../component/Search/Search';
+import Categories from '../../component/Categories/Categories';
 
 const Home = () => {
   return (
@@ -25,6 +26,9 @@ const Home = () => {
 
         {/*Search*/}
         <Search placeholder={"Search..."}/>
+
+        {/* categories */}
+        <Categories />
 
       </ScrollView>
 
