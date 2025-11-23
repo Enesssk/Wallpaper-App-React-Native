@@ -12,6 +12,18 @@ export const getInitialImages = async () => {
       per_page: "25"
     },
   })
-  console.log("response.data", response.data.hits)
+  return response.data.hits
+}
+
+export const searchImages = async (query) => {
+  const response = await apiClient.get(getImagesEndpoint, {
+    params: {
+      key: API_KEY,
+      q: query,
+      image_type: "photo",
+      per_page: "25",
+    }
+  })
+  console.log("search", response.data.hits)
   return response.data.hits
 }

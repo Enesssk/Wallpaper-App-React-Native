@@ -5,6 +5,8 @@ import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
 import { faClose, faSearch } from '@fortawesome/free-solid-svg-icons';
 import { scaleFontSize } from '../../assets/scaling';
 import style from "./style"
+import { searchImages } from '../../api/service/apiService';
+import Images from '../Images/Images';
 
 const Search = props => {
   const [search, setSearch] = useState("")
@@ -17,6 +19,13 @@ const Search = props => {
   const handleSearch = (val) => {
     setSearch(val)
     //search..
+    if(val.length > 2) {
+      searchImages(val).then(images => {
+        props.onSearchResults(images)
+      })
+    } else {
+      props.onSearchResults("")
+    }
   }
 
   return (
@@ -54,6 +63,7 @@ Search.defaultProps = {
 
 Search.propTypes = {
   placeholder: PropTypes.string,
+  onSearchResults: PropTypes.func.isRequired,
 }
 
 export default Search;
