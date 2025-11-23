@@ -13,6 +13,9 @@ import { getInitialImages } from '../../api/service/apiService';
 const Home = () => {
   const [images, setImages] = useState(null);
   const [searchResults, setSearchResults] = useState(null);
+  const [categoriesResults, setCategoriesResults] = useState(null);
+  const [resetCategory, setResetCategory] = useState(false);
+  const [searchValue, setSearchValue] = useState("");
 
   useEffect(() => {
     fetchImages()
@@ -27,6 +30,8 @@ const Home = () => {
       console.log("images",images)
     }
   }
+
+  const displayImages = searchResults || categoriesResults || images
 
   return (
     <SafeAreaView style={[globalStyle.flex, globalStyle.appBackground]}>
@@ -45,14 +50,25 @@ const Home = () => {
 
         {/*Search*/}
         <Search
-          onSearchResults={res => setSearchResults(res)}
+          onSearchResults={res => {
+            setSearchResults(res)
+            if(res) setCategoriesResults(null)
+            setResetCategory(true)
+          }}
+          searchValue={searchValue}
+          setSearchValue={setSearchValue}
           placeholder={"Search..."}/>
 
         {/* categories */}
-        <Categories />
+        <Categories reset={resetCategory} handleCategories={res => {
+          setCategoriesResults(res)
+          setSearchResults(null)
+          setResetCategory(false)
+          setSearchValue("")
+        }}/>
 
         {/* images */}
-        <Images data={searchResults || images} />
+        <Images data={displayImages} />
 
       </ScrollView>
 

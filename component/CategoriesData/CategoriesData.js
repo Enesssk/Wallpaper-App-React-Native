@@ -3,6 +3,7 @@ import { Pressable, Text, View } from 'react-native';
 import style from './style';
 import PropTypes from "prop-types"
 import Animated, { FadeInRight } from 'react-native-reanimated';
+import { chooseCategory } from '../../api/service/apiService';
 
 const CategoriesData = props => {
 

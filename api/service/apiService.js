@@ -27,3 +27,16 @@ export const searchImages = async (query) => {
   console.log("search", response.data.hits)
   return response.data.hits
 }
+
+export const chooseCategory = async (categoryName) => {
+  const response = await apiClient.get(getImagesEndpoint, {
+    params: {
+      key: API_KEY,
+      image_type: "photo",
+      per_page: "25",
+      category: categoryName
+    }
+  })
+  console.log("category",response.data.hits)
+  return response.data.hits
+}

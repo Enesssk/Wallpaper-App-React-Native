@@ -17,7 +17,7 @@ const Search = props => {
   }
 
   const handleSearch = (val) => {
-    setSearch(val)
+    props.setSearchValue(val)
     //search..
     if(val.length > 2) {
       searchImages(val).then(images => {
@@ -38,9 +38,9 @@ const Search = props => {
           style={style.textInput}
           placeholder={props.placeholder}
           ref={textInputRef}
-          value={search}
+          value={props.searchValue}
           onChangeText={(val) => {
-            setSearch(val)
+            props.setSearchValue(val)
             handleSearch(val)
           }}
         />
@@ -64,6 +64,8 @@ Search.defaultProps = {
 Search.propTypes = {
   placeholder: PropTypes.string,
   onSearchResults: PropTypes.func.isRequired,
+  searchValue: PropTypes.string.isRequired,
+  setSearchValue: PropTypes.func.isRequired,
 }
 
 export default Search;
