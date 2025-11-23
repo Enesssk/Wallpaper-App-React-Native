@@ -7,6 +7,7 @@ import { scaleFontSize } from '../../assets/scaling';
 import { faBarsStaggered } from '@fortawesome/free-solid-svg-icons';
 import Search from '../../component/Search/Search';
 import Categories from '../../component/Categories/Categories';
+import Images from '../../component/Images/Images';
 
 const Home = () => {
   return (
@@ -29,6 +30,9 @@ const Home = () => {
 
         {/* categories */}
         <Categories />
+
+        {/* images */}
+        <Images />
 
       </ScrollView>
 
