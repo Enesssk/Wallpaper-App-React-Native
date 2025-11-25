@@ -24,7 +24,7 @@ export const searchImages = async (query) => {
       per_page: "25",
     }
   })
-  console.log("search", response.data.hits)
+  //console.log("search", response.data.hits)
   return response.data.hits
 }
 
@@ -37,6 +37,6 @@ export const chooseCategory = async (categoryName) => {
       category: categoryName
     }
   })
-  console.log("category",response.data.hits)
+  //console.log("category",response.data.hits)
   return response.data.hits
 }

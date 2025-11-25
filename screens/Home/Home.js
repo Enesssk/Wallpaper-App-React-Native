@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { Pressable, SafeAreaView, ScrollView, Text, View } from 'react-native';
 import globalStyle from '../../assets/globalStyle';
 import style from "./style"
@@ -9,6 +9,7 @@ import Search from '../../component/Search/Search';
 import Categories from '../../component/Categories/Categories';
 import Images from '../../component/Images/Images';
 import { getInitialImages } from '../../api/service/apiService';
+import FilterBottomSheet from '../../component/FilterBottomSheet/FilterBottomSheet';
 
 const Home = () => {
   const [images, setImages] = useState(null);
@@ -16,6 +17,16 @@ const Home = () => {
   const [categoriesResults, setCategoriesResults] = useState(null);
   const [resetCategory, setResetCategory] = useState(false);
   const [searchValue, setSearchValue] = useState("");
+  const bottomSheetRef = useRef(null);
+
+
+  const openFiltersModal = () => {
+    bottomSheetRef?.current?.present();
+  }
+
+  const closeFiltersModal = () => {
+    bottomSheetRef?.current?.close();
+  }
 
   useEffect(() => {
     fetchImages()
@@ -39,7 +50,9 @@ const Home = () => {
       <View style={style.headersContainer}>
         <Text style={style.titleText}>Pixels</Text>
         <View>
-          <Pressable>
+          <Pressable
+            onPress={openFiltersModal}
+          >
             <FontAwesomeIcon icon={faBarsStaggered} size={scaleFontSize(28)} color={"black"}/>
           </Pressable>
         </View>
@@ -71,6 +84,9 @@ const Home = () => {
         <Images data={displayImages} />
 
       </ScrollView>
+
+      {/* FilterBottomSheet */}
+      <FilterBottomSheet ref={bottomSheetRef} />
 
     </SafeAreaView>
   )
