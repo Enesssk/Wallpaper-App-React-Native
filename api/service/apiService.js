@@ -34,9 +34,23 @@ export const chooseCategory = async (categoryName) => {
       key: API_KEY,
       image_type: "photo",
       per_page: "25",
-      category: categoryName
+      category: categoryName,
     }
   })
   //console.log("category",response.data.hits)
+  return response.data.hits
+}
+
+export const getOrderFilters = async (filters) => {
+  const response = await apiClient.get(getImagesEndpoint, {
+    params: {
+      key: API_KEY,
+      image_type: "photo",
+      per_page: "25",
+      order: filters.order,
+      orientation: filters.orientation,
+      colors: filters.colors,
+    }
+  })
   return response.data.hits
 }

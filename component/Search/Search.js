@@ -47,11 +47,16 @@ const Search = props => {
       </Pressable>
       {/*CloseSearchButton*/}
       {
-        search && <TouchableOpacity
-          onPress={() => setSearch("")}
+        props.searchValue.length > 0 && (
+          <TouchableOpacity
+          onPress={() => {
+            props.setSearchValue("")
+            props.onSearchResults("")
+          }}
           style={style.closeButtonContainer}>
           <FontAwesomeIcon icon={faClose} size={scaleFontSize(28)} color={"black"}/>
         </TouchableOpacity>
+        )
       }
     </View>
   )

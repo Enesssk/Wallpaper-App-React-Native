@@ -6,8 +6,10 @@ import style from "./style"
 const FilterCard = props => {
   return (
     <View style={style.topContainer}>
-      <TouchableOpacity style={style.cardContainer}>
-        <Text style={style.nameText}>{props.name}</Text>
+      <TouchableOpacity
+        onPress={() => props.clickActive()}
+        style={props.isActive ? style.isActiveCardContainer : style.cardContainer}>
+        <Text style={props.isActive ? style.isActiveNameText : style.nameText}>{props.name}</Text>
       </TouchableOpacity>
     </View>
   )
@@ -15,6 +17,8 @@ const FilterCard = props => {
 
 FilterCard.propTypes = {
   name: PropTypes.string.isRequired,
+  isActive: PropTypes.bool.isRequired,
+  clickActive: PropTypes.func.isRequired,
 }
 
 export default FilterCard

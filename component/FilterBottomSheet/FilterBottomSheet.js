@@ -1,17 +1,23 @@
-import React, { forwardRef, useMemo } from 'react';
-import { Text, View } from 'react-native';
+import React, { forwardRef, useMemo, useState } from 'react';
+import { Pressable, Text, View } from 'react-native';
 import {
   BottomSheetBackdrop,
   BottomSheetModal,
-  BottomSheetView,
 } from '@gorhom/bottom-sheet';
 import style from "./style"
 import Animated, { FadeInUp, FadeOutDown } from 'react-native-reanimated';
 import FilterCard from '../FilterCard/FilterCard';
 import { data } from "../../constants/index"
+import { getOrderFilters } from '../../api/service/apiService';
 
 const FilterBottomSheet = forwardRef((props, ref) => {
   const snapPoints = useMemo(() => ["75%"], [])
+  const { onApplyFilters } = props
+  const [activeFilters, setActiveFilters] = useState({
+    order: null,
+    orientation: null,
+    colors: null,
+  })
 
   //arka plan blur + fade animasyonu.
   const renderBackdrop = (backdropProps) => (
@@ -22,6 +28,18 @@ const FilterBottomSheet = forwardRef((props, ref) => {
       opacity={0.5}
     />
   );
+
+  const handleClick = (type, value) => {
+    setActiveFilters(prev => ({
+      ...prev, //önceki alanların üstüne. yani birden fazla seçim yaptım.
+      [type]: value //hangi türe göre seçilen değeri aldım.
+    }))
+  }
+
+  const handleSave = () => {
+    onApplyFilters(activeFilters);
+    ref.current?.close();
+  };
 
   return (
     <BottomSheetModal
@@ -47,7 +65,10 @@ const FilterBottomSheet = forwardRef((props, ref) => {
             return (
               <FilterCard
                 key={index}
-                name={item}/>
+                name={item}
+                isActive={activeFilters.order === item}
+                clickActive={() => handleClick("order", item)}
+              />
               )
           })
         }
@@ -61,7 +82,9 @@ const FilterBottomSheet = forwardRef((props, ref) => {
               return (
                 <FilterCard
                   key={index}
-                  name={item}/>
+                  name={item}
+                  isActive={activeFilters.orientation === item}
+                  clickActive={() => handleClick("orientation", item)}/>
               )
             })
           }
@@ -75,16 +98,24 @@ const FilterBottomSheet = forwardRef((props, ref) => {
               return (
                 <FilterCard
                   key={index}
-                  name={item}/>
+                  name={item}
+                  isActive={activeFilters.colors === item}
+                  clickActive={() => handleClick("colors", item)}/>
               )
             })
           }
         </View>
 
+        <Pressable
+          onPress={handleSave}
+          style={style.button}>
+          <Text style={style.buttonText}>Save</Text>
+        </Pressable>
 
       </Animated.View>
     </BottomSheetModal>
   )
 })
+
 
 export default FilterBottomSheet;

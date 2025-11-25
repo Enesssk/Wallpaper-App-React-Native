@@ -24,11 +24,27 @@ const style = StyleSheet.create({
     fontSize: scaleFontSize(22),
     fontWeight: 'bold',
     color: "rgba(9,8,8,0.66)",
-    marginTop: verticalScale(24)
+    marginTop: verticalScale(16)
   },
   orderContainer: {
     flexDirection: 'row',
     flexWrap: "wrap",
+  },
+  button: {
+    width: '70%',
+    height: verticalScale(35),
+    borderRadius: horizontalScale(14),
+    backgroundColor: "#232121",
+    marginHorizontal: horizontalScale(10),
+    justifyContent: "center",
+    alignSelf: "center",
+    marginTop: verticalScale(16)
+  },
+  buttonText: {
+    fontSize: scaleFontSize(22),
+    fontWeight: 'bold',
+    color: "white",
+    textAlign: "center",
   }
 })
 

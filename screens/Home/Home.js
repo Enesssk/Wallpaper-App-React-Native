@@ -8,13 +8,14 @@ import { faBarsStaggered } from '@fortawesome/free-solid-svg-icons';
 import Search from '../../component/Search/Search';
 import Categories from '../../component/Categories/Categories';
 import Images from '../../component/Images/Images';
-import { getInitialImages } from '../../api/service/apiService';
+import { getInitialImages, getOrderFilters } from '../../api/service/apiService';
 import FilterBottomSheet from '../../component/FilterBottomSheet/FilterBottomSheet';
 
 const Home = () => {
   const [images, setImages] = useState(null);
   const [searchResults, setSearchResults] = useState(null);
   const [categoriesResults, setCategoriesResults] = useState(null);
+  const [orderFiltersResults, setOrderFiltersResults] = useState(null);
   const [resetCategory, setResetCategory] = useState(false);
   const [searchValue, setSearchValue] = useState("");
   const bottomSheetRef = useRef(null);
@@ -22,10 +23,6 @@ const Home = () => {
 
   const openFiltersModal = () => {
     bottomSheetRef?.current?.present();
-  }
-
-  const closeFiltersModal = () => {
-    bottomSheetRef?.current?.close();
   }
 
   useEffect(() => {
@@ -42,7 +39,24 @@ const Home = () => {
     }
   }
 
-  const displayImages = searchResults || categoriesResults || images
+  //Filters
+  const applyFilters = async (filters) => {
+    setSearchResults(null);
+    setCategoriesResults(null);
+    setSearchValue("");
+    setResetCategory(true);
+
+    let params = {
+      order: filters.order,
+      orientation: filters.orientation,
+      colors: filters.colors
+    }
+
+    const data = await getOrderFilters(params)
+    setOrderFiltersResults(data)
+  }
+
+  const displayImages = searchResults || categoriesResults || orderFiltersResults || images
 
   return (
     <SafeAreaView style={[globalStyle.flex, globalStyle.appBackground]}>
@@ -65,6 +79,7 @@ const Home = () => {
         <Search
           onSearchResults={res => {
             setSearchResults(res)
+            setOrderFiltersResults(null)
             if(res) setCategoriesResults(null)
             setResetCategory(true)
           }}
@@ -75,6 +90,7 @@ const Home = () => {
         {/* categories */}
         <Categories reset={resetCategory} handleCategories={res => {
           setCategoriesResults(res)
+          setOrderFiltersResults(null)
           setSearchResults(null)
           setResetCategory(false)
           setSearchValue("")
@@ -86,7 +102,9 @@ const Home = () => {
       </ScrollView>
 
       {/* FilterBottomSheet */}
-      <FilterBottomSheet ref={bottomSheetRef} />
+      <FilterBottomSheet
+        onApplyFilters={applyFilters}
+        ref={bottomSheetRef} />
 
     </SafeAreaView>
   )

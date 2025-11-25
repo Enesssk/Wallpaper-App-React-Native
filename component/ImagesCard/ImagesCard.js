@@ -1,5 +1,5 @@
 import React from "react"
-import { Dimensions, Image, View } from 'react-native';
+import { Image, View } from 'react-native';
 import PropTypes from "prop-types"
 import style from './style';
 import { getImageSize } from '../../assets/scaling';
