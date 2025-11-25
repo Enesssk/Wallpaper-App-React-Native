@@ -22,7 +22,39 @@ const categories = [
     "music"
 ]
 
+  const order =
+  [
+    "popular",
+    "latest",
+  ]
+
+  const orientation = [
+    "horizontal",
+    "vertical",
+  ]
+
+  const colors = [
+    "grayscale",
+    "transparent",
+    "red",
+    "orange",
+    "yellow",
+    "green",
+    "turquoise",
+    "blue",
+    "lilac",
+    "pink",
+    "white",
+    "gray",
+    "black",
+    "brown"
+  ]
+
+
 export const data = {
-  categories
+  categories,
+  order,
+  orientation,
+  colors,
 }
 
