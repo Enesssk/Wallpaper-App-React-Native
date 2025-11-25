@@ -43,7 +43,34 @@ const style = StyleSheet.create({
     fontWeight: 'bold',
     color: "rgba(21,20,20,0.63)",
     textAlign: "center",
-  }
+  },
+  colorCardContainer: {
+    width: horizontalScale(32),
+    height: horizontalScale(32),
+    borderRadius: horizontalScale(10),
+    alignItems: "center",
+    justifyContent: "center",
+    marginTop: verticalScale(16),
+    marginRight: horizontalScale(12),
+    padding: 0,
+    borderWidth: horizontalScale(1),
+    borderColor: "rgba(21,20,20,0.63)",
+    backgroundColor: "white",
+  },
+
+  activeColorCardContainer: {
+    width: horizontalScale(32),
+    height: horizontalScale(32),
+    borderRadius: horizontalScale(10),
+    alignItems: "center",
+    justifyContent: "center",
+    marginTop: verticalScale(16),
+    marginRight: horizontalScale(12),
+    padding: 0,
+    borderWidth: horizontalScale(2),
+    borderColor: "black",
+    backgroundColor: "white",
+  },
 })
 
 export default style

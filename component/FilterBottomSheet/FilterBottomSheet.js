@@ -68,6 +68,7 @@ const FilterBottomSheet = forwardRef((props, ref) => {
                 name={item}
                 isActive={activeFilters.order === item}
                 clickActive={() => handleClick("order", item)}
+                isColor={false}
               />
               )
           })
@@ -84,7 +85,8 @@ const FilterBottomSheet = forwardRef((props, ref) => {
                   key={index}
                   name={item}
                   isActive={activeFilters.orientation === item}
-                  clickActive={() => handleClick("orientation", item)}/>
+                  clickActive={() => handleClick("orientation", item)}
+                  isColor={false}/>
               )
             })
           }
@@ -100,7 +102,8 @@ const FilterBottomSheet = forwardRef((props, ref) => {
                   key={index}
                   name={item}
                   isActive={activeFilters.colors === item}
-                  clickActive={() => handleClick("colors", item)}/>
+                  clickActive={() => handleClick("colors", item)}
+                  isColor={true}/>
               )
             })
           }
