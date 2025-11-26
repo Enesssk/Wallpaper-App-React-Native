@@ -38,7 +38,7 @@ const style = StyleSheet.create({
     flexDirection: "row",
     width: "300",
     justifyContent: "space-between",
-    marginTop: verticalScale(24),
+    marginTop: verticalScale(28),
   }
 })
 
