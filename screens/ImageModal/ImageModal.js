@@ -18,7 +18,10 @@ const ImageModal = () => {
   const {params: item} = useRoute()
   const { imageWidth, imageHeight, imageUrl } = item
 
-  const calculatedHeight = getImageSize(imageWidth, imageHeight)
+  const calculatedHeight = () => {
+    const {imageHeight: height, imageWidth: width} = item
+    return {height: getImageSize(height, width)}
+  }
 
   return (
     <View style={globalStyle.flex}>
@@ -31,9 +34,9 @@ const ImageModal = () => {
         <Animated.View
           entering={FadeInDown.springify().delay(100)}
           style={style.centerContainer}>
-        <View style={[style.imageContainer, {height: calculatedHeight}]}>
+        <View style={style.imageContainer}>
           <Image
-            style={[style.image, {height: calculatedHeight}]}
+            style={[style.image, calculatedHeight()]}
             source={{uri: imageUrl}}/>
         </View>
 

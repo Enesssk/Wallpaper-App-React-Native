@@ -18,8 +18,8 @@ const style = StyleSheet.create({
     overflow: "hidden",
   },
   image: {
+    height: "100%",
     width: "100%",
-    resizeMode: "cover",
   },
   centerContainer: {
     flex: 1,

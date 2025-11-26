@@ -5,7 +5,11 @@ import {
   BottomSheetModal,
 } from '@gorhom/bottom-sheet';
 import style from "./style"
-import Animated, { FadeInUp, FadeOutDown } from 'react-native-reanimated';
+import Animated, {
+  FadeInRight,
+  FadeInUp,
+  FadeOutDown,
+} from 'react-native-reanimated';
 import FilterCard from '../FilterCard/FilterCard';
 import { data } from "../../constants/index"
 import { getOrderFilters } from '../../api/service/apiService';
@@ -50,8 +54,8 @@ const FilterBottomSheet = forwardRef((props, ref) => {
       backgroundStyle={style.sheetBackground}
     >
       <Animated.View
-        entering={FadeInUp.duration(300)}
-        exiting={FadeOutDown.duration(200)}
+        entering={FadeInUp.duration(300).springify()}
+        exiting={FadeOutDown.duration(200).springify()}
         style={style.bottomSheetContainer}>
 
          {/*Title*/}
@@ -59,7 +63,9 @@ const FilterBottomSheet = forwardRef((props, ref) => {
 
           {/*Order*/}
         <Text style={style.filterTitleText}>Order</Text>
-        <View style={style.orderContainer}>
+        <Animated.View
+          entering={FadeInRight.delay(100).springify()}
+          style={style.orderContainer}>
         {
           data.order.map((item, index) => {
             return (
@@ -73,11 +79,13 @@ const FilterBottomSheet = forwardRef((props, ref) => {
               )
           })
         }
-        </View>
+        </Animated.View>
 
         {/*Orientation*/}
         <Text style={style.filterTitleText}>Orientation</Text>
-        <View style={style.orderContainer}>
+        <Animated.View
+          entering={FadeInRight.delay(100).springify()}
+          style={style.orderContainer}>
           {
             data.orientation.map((item, index) => {
               return (
@@ -90,11 +98,13 @@ const FilterBottomSheet = forwardRef((props, ref) => {
               )
             })
           }
-        </View>
+        </Animated.View>
 
         {/*Colors*/}
         <Text style={style.filterTitleText}>Colors</Text>
-        <View style={style.orderContainer}>
+        <Animated.View
+          entering={FadeInRight.delay(100).springify()}
+          style={style.orderContainer}>
           {
             data.colors.map((item, index) => {
               return (
@@ -107,7 +117,7 @@ const FilterBottomSheet = forwardRef((props, ref) => {
               )
             })
           }
-        </View>
+        </Animated.View>
 
         <Pressable
           onPress={handleSave}
