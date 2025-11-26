@@ -38,7 +38,7 @@ const style = StyleSheet.create({
     marginHorizontal: horizontalScale(10),
     justifyContent: "center",
     alignSelf: "center",
-    marginTop: verticalScale(16)
+    marginTop: verticalScale(32)
   },
   buttonText: {
     fontSize: scaleFontSize(22),

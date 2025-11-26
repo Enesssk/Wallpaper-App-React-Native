@@ -1,5 +1,12 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { Pressable, SafeAreaView, ScrollView, Text, View } from 'react-native';
+import {
+  Pressable,
+  SafeAreaView,
+  ScrollView,
+  Text,
+  TouchableOpacity,
+  View,
+} from 'react-native';
 import globalStyle from '../../assets/globalStyle';
 import style from "./style"
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
@@ -64,11 +71,11 @@ const Home = () => {
       <View style={style.headersContainer}>
         <Text style={style.titleText}>Pixels</Text>
         <View>
-          <Pressable
+          <TouchableOpacity
             onPress={openFiltersModal}
           >
             <FontAwesomeIcon icon={faBarsStaggered} size={scaleFontSize(28)} color={"black"}/>
-          </Pressable>
+          </TouchableOpacity>
         </View>
       </View>
 
